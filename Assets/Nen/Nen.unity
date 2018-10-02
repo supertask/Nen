@@ -2860,7 +2860,7 @@ Prefab:
     - target: {fileID: 2300000, guid: fec5acf1dc5f44ab182ecad80dd96b83, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: fd858a920a90448f4ac04dd0092fbdc0, type: 2}
+      objectReference: {fileID: 2100000, guid: ecdcc9b06f06f49cd98fa01cb1b484da, type: 2}
     - target: {fileID: 400000, guid: fec5acf1dc5f44ab182ecad80dd96b83, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
