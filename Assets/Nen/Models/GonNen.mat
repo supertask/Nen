@@ -82,7 +82,7 @@ Material:
     - _MulColor: 1
     - _OcclusionStrength: 1
     - _Offset: 1.45
-    - _Outline: 0.04
+    - _Outline: 0.03
     - _OutlineZ: 0
     - _Parallax: 0.02
     - _RimPower: 1.4

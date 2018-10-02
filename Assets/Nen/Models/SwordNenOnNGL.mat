@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SwordNen
+  m_Name: SwordNenOnNGL
   m_Shader: {fileID: 4800000, guid: ff2179b7a3e624f089131feec1724d7d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4

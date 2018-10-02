@@ -1,4 +1,7 @@
 ﻿
+/*
+ * 注意点： 適用するオブジェクトsmoothしなければならない
+ */
 Shader "1UP/Magic Outline/NenLit"
 {
 	Properties
@@ -78,6 +81,7 @@ Shader "1UP/Magic Outline/NenLit"
 			float3 _LightDir;
 			//float _MulColor;
 
+ 
 			v2f vert (appdata v)
 			{
 				v2f o;
@@ -88,6 +92,7 @@ Shader "1UP/Magic Outline/NenLit"
 				return o;
 			}
 
+            //手のシェーダ
 			fixed4 frag (v2f i) : SV_Target
 			{
 				fixed4 col = tex2D(_MainTex, i.uv) * _Color;
@@ -100,6 +105,7 @@ Shader "1UP/Magic Outline/NenLit"
 
 				half4 c;
 				#if _LDIR_ON
+                //環境光
 				c.rgb = UNITY_LIGHTMODEL_AMBIENT.xyz + col.rgb * ramp * max(0.0,dot(i.worldnormal,normalize(half3(_WorldSpaceLightPos0.xyz)))) * _LightColor0.rgb * _MulColor;
 				#else
 				c.rgb = col.rgb * ramp * _MulColor;
