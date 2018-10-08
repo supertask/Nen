@@ -82,7 +82,7 @@ Material:
     - _MulColor: 1
     - _OcclusionStrength: 1
     - _Offset: 1.45
-    - _Outline: 0.03
+    - _Outline: 0.015
     - _OutlineZ: 0.29
     - _Parallax: 0.02
     - _RimPower: 1.4
@@ -96,7 +96,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Color2: {r: 1, g: 0.7215637, b: 0, a: 0.98039216}
-    - _ColorR: {r: 0.95, g: 1, b: 0, a: 1}
+    - _Color2: {r: 1, g: 0.81786364, b: 0, a: 0.98039216}
+    - _ColorR: {r: 1, g: 0.58835566, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
