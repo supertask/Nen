@@ -86,7 +86,7 @@ Material:
     - _OutlineZ: 0.29
     - _Parallax: 0.02
     - _RimPower: 1.4
-    - _Scale: 0.0023
+    - _Scale: 0.0018
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpeedX: 10

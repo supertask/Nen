@@ -193,7 +193,8 @@ Shader "1UP/Magic Outline/NenLit"
 
 			fixed4 frag(v2f i) : SV_Target
 			{
-				float2 uv = float2(i.pos.x* _Scale - (_Time.x * _SpeedX), i.pos.y * _Scale - (_Time.x * _SpeedY)); 
+				//float2 uv = float2(i.pos.x* _Scale - (_Time.x * _SpeedX), i.pos.y * _Scale - (_Time.x * _SpeedY)); 
+                float2 uv = float2(i.pos.x* _Scale - (_Time.x * _SpeedX * 2), i.pos.y * _Scale - (_Time.x * _SpeedY * 0)); 
 				float4 text = tex2D(_NoiseTex, uv); 
 				float4 rim = pow(saturate(dot(i.viewDir, i.normalDir)), _RimPower ) ;
 				rim -= text; 
