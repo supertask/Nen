@@ -2,11 +2,11 @@
 Aiming at Nen on Hunter x Hunter(Aura effect).
 But currently, Killua lightning is only available. Others are comming soon!
 
-## Killua lightning with North Star
-![Killua lightning with North Star](images/lightning_with_northstar.gif)
-
 ## Killua lightning
 ![Killua lightning](images/lightning.gif)
+
+## Killua lightning with North Star
+![Killua lightning with North Star](images/lightning_with_northstar.gif)
 
 ## Requirements
 - LeapMotion and its package
