@@ -22,7 +22,6 @@ Please install above unity packages.
 
 ## LICENSE
 Following [GNU LICENSE](./LICENSE)
-When you publish the modified version, please mention my twitter account([@pythor](https://twitter.com/pythor) if you can.
 
 ## Thank
 LEAP Motion (https://www.leapmotion.com/)
