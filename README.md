@@ -22,10 +22,13 @@ Please install above unity packages.
 - Unity 2018.3.0b7 (beta)
 
 ## LICENSE
-Following [GNU LICENSE](./LICENSE)
-When you publish the modified version, please mention my twitter account([@pythor](https://twitter.com/pythor) if you can.
+Following [GNU LICENSE](./LICENSE).
+When you publish the modified version, please mention my twitter account([@pythor](https://twitter.com/pythor ) if you can. I wanna check it out to see the progress ;)
+
+## Author
+[@pythor](https://twitter.com/pythor ) 
 
 ## Thank
-LEAP Motion (https://www.leapmotion.com/)
-exciii (https://exiii.jp/)
+- LEAP Motion (https://www.leapmotion.com/)
+- exciii (https://exiii.jp/)
 
