@@ -19,11 +19,15 @@ Please install above unity packages.
 - Windows 10 (64 bit)
 - NVIDIA GeForce GTX 1060 6GB
 - CPU Core i7-8550U
+- Unity 2018.3.0b7 (beta)
 
 ## LICENSE
 Following [GNU LICENSE](./LICENSE)
 
+## Author
+[@pythor](https://twitter.com/pythor ) 
+
 ## Thank
-LEAP Motion (https://www.leapmotion.com/)
-exciii (https://exiii.jp/)
+- LEAP Motion (https://www.leapmotion.com/)
+- exciii (https://exiii.jp/)
 
