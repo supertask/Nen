@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Leap;
 using Leap.Unity;
+using System.Linq;
 
 public class ObjSelector : MonoBehaviour
 {
@@ -23,11 +24,11 @@ public class ObjSelector : MonoBehaviour
     void Update()
     {
         Frame frame = this.m_Provider.CurrentFrame;
-        foreach(Hand hand in frame.Hands)
+        foreach (Hand hand in frame.Hands)
         {
             Vector3 src = this.GetVector3(hand.PalmPosition);
-            Vector3 target =this.GetVector3(hand.PalmNormal);
-            Debug.DrawLine(src, target * 3, Color.red);
+            Vector3 target = this.GetVector3(hand.PalmNormal);
+            //Debug.DrawLine(src, target * 3, Color.red);
             RaycastHit[] hitObjects = Physics.SphereCastAll(src, ObjSelector.CASTING_SIZE,
                 target, Mathf.Infinity, FIELD_LAYER);
             this.SelectObjects(hitObjects);
@@ -41,7 +42,7 @@ public class ObjSelector : MonoBehaviour
 
     }
 
-    private void SelectObjects(RaycastHit[] hitObjs)
+    public void SelectObjects(RaycastHit[] hitObjs)
     {
         foreach (RaycastHit obj in hitObjs)
         {
@@ -49,10 +50,36 @@ public class ObjSelector : MonoBehaviour
         }
     }
 
-
     private Vector3 GetVector3(Vector v)
     {
         return new Vector3(v.x, v.y, v.z);
     }
 
+    public static void MapObjects()
+    {
+        GameObject selecting = GameObject.Find("Selecting");
+        GameObject mappedObj = GameObject.Find("Mapped");
+
+        // Normal foreach(var t in transform) can't use in this case.
+        // Because a number of the child transforms is changed in foreach
+        // Solution: https://answers.unity.com/questions/605341/why-does-foreach-work-only-12-of-a-time.html
+        List<Transform> copiedSelectingTransforms = selecting.transform.Cast<Transform>().ToList();
+        foreach (Transform selectingTrans in copiedSelectingTransforms) {
+            selectingTrans.parent = mappedObj.transform;
+        }
+    }
+
+    public static void SelectMappedObjects()
+    {
+        GameObject selecting = GameObject.Find("Selecting");
+        GameObject mapped = GameObject.Find("Mapped");
+
+        // Normal foreach(var t in transform) can't use in this case.
+        // Because a number of the child transforms is changed in foreach
+        // Solution: https://answers.unity.com/questions/605341/why-does-foreach-work-only-12-of-a-time.html
+        List<Transform> copiedMappedTransforms = mapped.transform.Cast<Transform>().ToList();
+        foreach (Transform mappedTrans in copiedMappedTransforms) {
+            mappedTrans.parent = selecting.transform;
+        }
+    }
 }

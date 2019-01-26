@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+  - enabled: 0
+    path: Assets/Nen/GonNen.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/SimpleMapping/SimpleMapping.unity
+    guid: ea63234e4d300154ca3650203450f2dd
+  - enabled: 1
+    path: Assets/lightningEffect/Scenes/LightningOnNorthStar.unity
+    guid: 9309b6d7de10c2041a457d658fee89d6
   m_configObjects: {}

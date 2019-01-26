@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class SimpleMapper : MonoBehaviour
+public class SimpleMapper 
 {
     private GameObject originBox;
     private GameObject mapped;
@@ -10,10 +11,10 @@ public class SimpleMapper : MonoBehaviour
     private GameObject field;
 
     // Start is called before the first frame update
-    void Start()
+    public SimpleMapper()
     {
-        this.originBox = GameObject.Find("OriginCube");
         this.mapped = GameObject.Find("Mapped");
+        this.originBox = GameObject.Find("OriginCube");
         this.selecting = GameObject.Find("Selecting");
         this.field = GameObject.Find("Field");
         this.Load();
@@ -22,10 +23,15 @@ public class SimpleMapper : MonoBehaviour
     /*
      * セーブデータを読み込む
      */
-    void Load()
+    public void Load()
     {
+        bool is_shown_map = (SceneManager.GetActiveScene().name == "SimpleMapping");
+
         if (PlayerPrefs.HasKey("mappedPosList"))
         {
+            if (this.mapped.transform.childCount > 0) {
+                foreach(Transform child in this.mapped.transform) { GameObject.Destroy(child.gameObject); }
+            }
             Vector3[] posList = PlayerPrefsX.GetVector3Array("mappedPosList");
             Quaternion[] rotList = PlayerPrefsX.GetQuaternionArray("mappedRotList");
             Vector3[] scaleList = PlayerPrefsX.GetVector3Array("mappedScaleList");
@@ -36,7 +42,7 @@ public class SimpleMapper : MonoBehaviour
                 obj.transform.rotation = rotList[i];
                 obj.transform.localScale = scaleList[i];
                 obj.transform.parent = this.mapped.transform;
-                obj.GetComponent<Renderer>().enabled = true;
+                obj.GetComponent<Renderer>().enabled = is_shown_map;
             }
         }
         else {
@@ -44,31 +50,20 @@ public class SimpleMapper : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.B)) {
-            this.mapSelectedObjects(); //選択したオブジェクトをマッピングする
-
-            //boxを作成
+    //boxを作成
+    public void CreateBox() {
+            this.MapSelectedObjects(); //選択したオブジェクトをマッピングする
             Vector3 p = this.originBox.transform.position;
             GameObject box = Object.Instantiate(originBox) as GameObject; //コピー
             box.transform.position = p;
             box.GetComponent<Renderer>().enabled = true;
             box.transform.parent = this.selecting.transform;
-
-            //
-        } else if (Input.GetKeyUp(KeyCode.E)) {
-            //マッピング終了
-            this.mapSelectedObjects(); //選択したオブジェクトをマッピングする
-            this.Save();
-        }
     }
 
     /*
      * 選択したオブジェクトをマップ済みオブジェクトへ登録する
      */
-    private void mapSelectedObjects() {
+    private void MapSelectedObjects() {
         foreach(Transform child in this.selecting.transform) {
             child.parent = this.mapped.transform;
         }
@@ -79,6 +74,7 @@ public class SimpleMapper : MonoBehaviour
      */
     public void Save()
     {
+        this.MapSelectedObjects(); //選択したオブジェクトをマッピングする
         List<Vector3> savingPosList = new List<Vector3>() { };
         List<Quaternion> savingRotList = new List<Quaternion>() { };
         List<Vector3> savingScaleList = new List<Vector3>() { };

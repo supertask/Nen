@@ -137,6 +137,7 @@ namespace Leap.Unity {
         case RotationMethod.None:
           break;
         case RotationMethod.Single:
+          //Only y axit works
           Vector3 p = _pinchDetectorA.Position;
           p.y = _anchor.position.y;
           _anchor.LookAt(p);
