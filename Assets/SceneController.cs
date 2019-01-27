@@ -15,19 +15,19 @@ public class SceneController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Alpha1)) {
-            this.ChangeScene("SimpleMapping");
-        } else if (Input.GetKeyUp(KeyCode.Alpha2)) {
             this.ChangeScene("Force");
-        } else if (Input.GetKeyUp(KeyCode.Alpha3)) {
+        } else if (Input.GetKeyUp(KeyCode.Alpha2)) {
             this.ChangeScene("LightningOnNorthStar");
+        } else if (Input.GetKeyUp(KeyCode.Alpha3)) {
+            this.ChangeScene("SimpleMapping");
         } else if (Input.GetKeyUp(KeyCode.Alpha4)) {
-            this.ChangeScene("Trail");
+            ///this.ChangeScene("Trail");
         }
     }
 
     public void ChangeScene(string sceneName) {
         if (SceneManager.GetActiveScene().name == sceneName) { return; }
         SceneManager.LoadScene(sceneName);
-        this.mapper.Load();
+        //this.mapper.Load();
     }
 }

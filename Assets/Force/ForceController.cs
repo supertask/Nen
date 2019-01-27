@@ -22,7 +22,7 @@ public class ForceController : MonoBehaviour
     private GameObject garden;
     private bool usedImpact;
     public float GRAVITY_COEF = 0.00000000006671999f;    // 万有引力係数
-    public float BLACK_HOLE_MASS = 10000000000000f * 0.4f; //質量
+    public float BLACK_HOLE_MASS = 1f * 0.4f; //ブラックホールの質量
 
     void Start() { this.Init(); }
 
@@ -64,7 +64,7 @@ public class ForceController : MonoBehaviour
             }
 
             //Do a KazaAna effect while a right hand is opend
-            if (this.isOpenHands[RIGHT]) {
+            if (this.isOpenHands[RIGHT] && hands[RIGHT] != null) {
                 this.KazaAna(hands[RIGHT], this.insideBuilding);
             }
         }
@@ -72,13 +72,15 @@ public class ForceController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.F)) {
             this.mode = FORCE;
             ObjSelector.MapObjects(); //選択したオブジェクトを固定する
-        } else if (Input.GetKeyUp(KeyCode.H)) {
+        }
+        else if (Input.GetKeyUp(KeyCode.H)) {
             //ビルの外壁とガーデンを消す
             this.mode = HIDE;
-            //this.outsideBuilding.SetActive(false);
-            //this.garden.SetActive(false);
             this.HideObjectsRecursively(this.outsideBuilding);
             this.garden.SetActive(false);
+        }
+        else if (Input.GetKeyUp(KeyCode.G)) {
+            this.AddRigidbody(this.insideBuilding);
         }
         else if (Input.GetKeyUp(KeyCode.P)) {
             this.mode = PINCH_MOVE;
@@ -87,42 +89,36 @@ public class ForceController : MonoBehaviour
     }
 
     private void Impact(Hand hand, GameObject obj) {
-        if (this.usedImpact) {
-            //2回目以降は波動
-            /*
-            Vector3 src = this.GetVector3(hand.PalmPosition);
-            Vector3 target = this.GetVector3(hand.PalmVelocity);
-            Debug.DrawLine(src, target * 10, Color.red);
-            Debug.Log(target);
-            */
-        } else {
-            //1回目はグラビティ
-            this.AddRigidbody(obj);
-        }
-        this.usedImpact = true;
+        /*
+        Vector3 src = this.GetVector3(hand.PalmPosition);
+        Vector3 target = this.GetVector3(hand.PalmVelocity);
+        Debug.DrawLine(src, target * 10, Color.red);
+        Debug.Log(target);
+        */
+        //this.usedImpact = true;
     }
 
     /*
      * Kaza Ana Effect at Inuyasha(Anime)
      * It is a black hole effect
      */
-    private void KazaAna(Hand hand, GameObject obj) {
-        foreach (Transform t in obj.GetComponentsInChildren<Transform>())
+    private void KazaAna(Hand hand, GameObject obj)
+    {
+        foreach (Transform objTrans in obj.GetComponentsInChildren<Transform>())
         {
-            Vector3 hPos = this.GetVector3(hand.PalmPosition);
-            Vector3 direction = hPos - t.position;
-            float R = direction.magnitude;
+            Rigidbody rigid = objTrans.gameObject.GetComponent<Rigidbody>();
+            if (rigid == null) { continue; }
 
-            float objMass = t.gameObject.GetComponent<Rigidbody>().mass;
+            Vector3 handPos = this.GetVector3(hand.PalmPosition);
+            Vector3 direction = objTrans.position - handPos;
+            float R = direction.magnitude;
+            if (R < 0.001f) { objTrans.gameObject.SetActive(false); }
+
+            rigid.SetDensity(0.7f); // wood density
+            float objMass = rigid.mass;
             float gravity = GRAVITY_COEF * objMass * BLACK_HOLE_MASS / (R * R);
-            //t.position 
+            rigid.AddForce(-gravity * direction, ForceMode.Force);
         }
-        /*
-        Vector3 src = this.GetVector3(hand.PalmPosition);
-        Vector3 target = this.GetVector3(hand.PalmVelocity);
-        Debug.DrawLine(src, target * 3, Color.red);
-        Debug.Log(target);
-        */
     }
 
     private void HideObjectsRecursively(GameObject obj) {
